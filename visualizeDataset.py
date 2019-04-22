@@ -16,11 +16,12 @@ def imageSegmentationGenerator( images_path , segs_path ,  n_classes ):
 	segmentations.sort()
 
 	colors = [  ( random.randint(0,255),random.randint(0,255),random.randint(0,255)   ) for _ in range(n_classes)  ]
-
-	assert len( images ) == len(segmentations)
+	print "len(images):", len(images)
+	print "len(segs):",len(segmentations)
+	#assert len( images ) == len(segmentations)
 
 	for im_fn , seg_fn in zip(images,segmentations):
-		assert(  im_fn.split('/')[-1] ==  seg_fn.split('/')[-1] )
+		assert(  im_fn.split('/')[-1] !=  seg_fn.split('/')[-1] )
 
 		img = cv2.imread( im_fn )
 		seg = cv2.imread( seg_fn )
@@ -40,9 +41,9 @@ def imageSegmentationGenerator( images_path , segs_path ,  n_classes ):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--images", type = str  )
-parser.add_argument("--annotations", type = str  )
-parser.add_argument("--n_classes", type=int )
+parser.add_argument("--images", type = str, default = "../data/crack_data_processed/val_copy_1/"  )
+parser.add_argument("--annotations", type = str , default = "../data/crack_data_processed/valannot_copy_1/" )
+parser.add_argument("--n_classes", type=int, default =9 )
 args = parser.parse_args()
 
 
