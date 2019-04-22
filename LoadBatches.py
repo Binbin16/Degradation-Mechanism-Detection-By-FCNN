@@ -67,8 +67,10 @@ def imageSegmentationGenerator( images_path , segs_path ,  batch_size,  n_classe
 	segmentations.sort()
 
 	assert len( images ) == len(segmentations)
-	for im , seg in zip(images,segmentations):
-		assert(  im.split('/')[-1].split(".")[0] ==  seg.split('/')[-1].split(".")[0] )
+	#print "len(images):",len( images )
+	#print "len(segmentations):",len(segmentations)    
+#	for im , seg in zip(images,segmentations):
+#		assert(  im.split('/')[-1].split(".")[0] ==  seg.split('/')[-1].split(".")[0] )
 
 	zipped = itertools.cycle( zip(images,segmentations) )
 
@@ -89,5 +91,3 @@ def imageSegmentationGenerator( images_path , segs_path ,  batch_size,  n_classe
 
 # m = Models.VGGSegnet.VGGSegnet( 10  , use_vgg_weights=True ,  optimizer='adadelta' , input_image_size=( 800 , 550 )  )
 # m.fit_generator( G , 512  , nb_epoch=10 )
-
-
